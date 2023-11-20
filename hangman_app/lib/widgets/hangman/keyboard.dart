@@ -15,14 +15,15 @@ Map<String, List<List<String>>> keyboardLayouts = {
 
 class OnScreenKeyboard extends StatefulWidget {
   final String language;
+  final Function(String) onKeyPress;
 
-  OnScreenKeyboard({Key? key, required this.language}) : super(key: key);
+  OnScreenKeyboard({Key? key, required this.language, required this.onKeyPress});
 
   @override
-  _OnScreenKeyboardState createState() => _OnScreenKeyboardState();
+  OnScreenKeyboardState createState() => OnScreenKeyboardState();
 }
 
-class _OnScreenKeyboardState extends State<OnScreenKeyboard> {
+class OnScreenKeyboardState extends State<OnScreenKeyboard> {
   @override
   Widget build(BuildContext context) {
     // Retrieve the layout for the current language
@@ -35,7 +36,7 @@ class _OnScreenKeyboardState extends State<OnScreenKeyboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: row.map((key) {
                   return KeyboardKey(
-                      singleKey: key, onKeyPress: _handleKeyPress);
+                      singleKey: key, onKeyPress: widget.onKeyPress);
                 }).toList(),
               );
             }).toList(),
@@ -43,10 +44,6 @@ class _OnScreenKeyboardState extends State<OnScreenKeyboard> {
         : Container(); // Return an empty container if the layout is not found
   }
 
-  void _handleKeyPress(String key) {
-    // Handle the key press event
-    print('Key pressed: $key');
-  }
 }
 
 class KeyboardKey extends StatelessWidget {
@@ -71,7 +68,7 @@ class KeyboardKey extends StatelessWidget {
             )
           )),
           onPressed: () => onKeyPress(singleKey),
-          child: Text(singleKey, textAlign: TextAlign.center),
+          child: Text(singleKey),
         ),
       ),
     );

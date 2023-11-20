@@ -90,7 +90,7 @@ class HomeViewState extends State<HomeView> {
         padding: MaterialStatePropertyAll(EdgeInsets.fromLTRB(40, 10, 40, 10)),
       ),
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HangmanView(language: currentLanguage)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HangmanView(language: currentLanguage, difficulty: currentDifficulty)));
       },
       child: Column(
         children: [
