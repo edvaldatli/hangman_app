@@ -29,17 +29,11 @@ class _HangmanViewState extends State<HangmanView> {
         words.getRandomWord(widget.language, widget.difficulty)!.wordString);
   }
 
-  void _onKeyPress(String key) {
-    setState(() {
-      gameLogic.guessLetter(key);
-    });
-  }
-
-  bool handleKeyPress(String key) {
+  void handleKeyPress(String key) {
+    print('Pressed: $key');
     bool isCorrect = gameLogic.guessLetter(key);
-    // Perform other state updates if necessary
-    setState(() {});
-    return isCorrect;
+    // Now, depending on if the guess is correct, you would update the UI or handle the game logic accordingly
+    // You do not need to pass isCorrect back to the keyboard, you only need to update the state of the keys in this function.
   }
 
   @override
@@ -49,9 +43,9 @@ class _HangmanViewState extends State<HangmanView> {
         children: [
           GameDisplay(displayWord: gameLogic.getDisplayWord()),
           OnScreenKeyboard(
-            language: widget.language.name,
-            onKeyPress: handleKeyPress
-          ),
+              language: widget.language.name,
+              onKeyPress: handleKeyPress,
+          )
         ],
       ),
     );

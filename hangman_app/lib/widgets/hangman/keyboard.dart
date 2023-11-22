@@ -15,7 +15,7 @@ final Map<String, List<List<String>>> keyboardLayouts = {
 
 class OnScreenKeyboard extends StatefulWidget {
   final String language;
-  final Function(String, bool) onKeyPress;
+  final Function(String key) onKeyPress;
 
   OnScreenKeyboard({Key? key, required this.language, required this.onKeyPress})
       : super(key: key);
@@ -25,9 +25,15 @@ class OnScreenKeyboard extends StatefulWidget {
 }
 
 class OnScreenKeyboardState extends State<OnScreenKeyboard> {
+  // A map to keep track of key colors
   Map<String, Color> keyColors = {};
 
-  void updateKeyColor(String key, bool isCorrect) {
+  void _handleKeyPress(String key) {
+    // Call the onKeyPress method given by the parent widget,
+    // which will return if the guess is correct or not.
+    bool isCorrect = widget.onKeyPress(key);
+
+    // Update the color of the key based on the guess.
     setState(() {
       keyColors[key] = isCorrect ? Colors.green : Colors.red;
     });
@@ -35,26 +41,30 @@ class OnScreenKeyboardState extends State<OnScreenKeyboard> {
 
   @override
   Widget build(BuildContext context) {
-    var layout = keyboardLayouts[widget.language]; // Assume this is defined
+    var layout = keyboardLayouts[widget.language];
+
+    // Build the keyboard layout
     return layout != null
         ? Column(
             children: layout.map((row) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: row.map((key) {
-                  return KeyboardKey(
-                    singleKey: key,
-                    onKeyPress: (String pressedKey) {
-                      bool isCorrect = widget.onKeyPress(pressedKey);
-                      updateKeyColor(pressedKey, isCorrect);
-                    },
-                    color: keyColors[key] ?? Colors.grey,
+                  // Get the color for the current key, defaulting to grey if not yet pressed
+                  return Flexible(
+                    child: Container(
+                      child: KeyboardKey(
+                        singleKey: key,
+                        color: keyColors[key] ?? Colors.grey,
+                        onKeyPress: _handleKeyPress
+                      ),
+                    ),
                   );
                 }).toList(),
               );
             }).toList(),
           )
-        : Container();
+        : Container(); // Return an empty container if the layout is not found
   }
 }
 
@@ -67,14 +77,19 @@ class KeyboardKey extends StatelessWidget {
     Key? key,
     required this.singleKey,
     required this.onKeyPress,
-    this.color = Colors.grey,
+    this.color = Colors.white,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => onKeyPress(singleKey),
-      style: ElevatedButton.styleFrom(primary: color),
+      onPressed: () {
+        onKeyPress(singleKey);
+      },
+      style: ButtonStyle(
+        padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 0)),
+        backgroundColor: MaterialStatePropertyAll(color),
+      ),
       child: Text(singleKey),
     );
   }
