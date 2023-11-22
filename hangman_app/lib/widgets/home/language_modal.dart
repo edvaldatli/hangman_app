@@ -24,7 +24,7 @@ void showLanguageModal(BuildContext context, Language currentLanguage, void Func
         child: Column(
           children: [
             const Text(
-              'Change Difficulty',
+              'Change Language',
               style: TextStyle(
                 fontSize: 18,
                 decoration: TextDecoration.underline
