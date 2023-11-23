@@ -10,12 +10,15 @@ final Map<String, List<List<String>>> keyboardLayouts = {
       ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Ð'],
       ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Æ'],
       ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Þ']
+    ],
+    'IcelandicExtra':[
+      ['É', 'Ý', 'Ú', 'Í', 'Ó', 'Á'],
     ]
   };
 
 class OnScreenKeyboard extends StatefulWidget {
   final String language;
-  final Function(String key) onKeyPress;
+  final bool Function(String key) onKeyPress;
 
   OnScreenKeyboard({Key? key, required this.language, required this.onKeyPress})
       : super(key: key);
@@ -25,35 +28,34 @@ class OnScreenKeyboard extends StatefulWidget {
 }
 
 class OnScreenKeyboardState extends State<OnScreenKeyboard> {
-  // A map to keep track of key colors
   Map<String, Color> keyColors = {};
 
-  void _handleKeyPress(String key) {
-    bool isCorrect = widget.onKeyPress(key);
+  bool handleKeyPress(String key) {
+    bool isCorrect = widget.onKeyPress.call(key);
     setState(() {
       keyColors[key] = isCorrect ? Colors.green : Colors.red;
     });
-    print('test');
+    return isCorrect;
   }
+
+  // !TODO SWITCH TO EXTRA CHARACTERS KEYBOARD
 
   @override
   Widget build(BuildContext context) {
     var layout = keyboardLayouts[widget.language];
 
-    // Build the keyboard layout
     return layout != null
         ? Column(
             children: layout.map((row) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: row.map((key) {
-                  // Get the color for the current key, defaulting to grey if not yet pressed
                   return Flexible(
                     child: Container(
                       child: KeyboardKey(
                         singleKey: key,
-                        color: keyColors[key] ?? Colors.grey,
-                        onKeyPress: _handleKeyPress,
+                        color: keyColors[key] ?? Colors.white10,
+                        onKeyPress: handleKeyPress,
                       ),
                     ),
                   );
@@ -61,7 +63,7 @@ class OnScreenKeyboardState extends State<OnScreenKeyboard> {
               );
             }).toList(),
           )
-        : Container(); // Return an empty container if the layout is not found
+        : Container();
   }
 }
 
@@ -79,15 +81,23 @@ class KeyboardKey extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        onKeyPress(singleKey);
-      },
-      style: ButtonStyle(
-        padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 0)),
-        backgroundColor: MaterialStatePropertyAll(color),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(3, 3, 3, 3),
+      child: ElevatedButton(
+        onPressed: () {
+          onKeyPress(singleKey);
+        },
+        style: ButtonStyle(
+          padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
+          backgroundColor: MaterialStatePropertyAll(color),
+          shape: MaterialStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6),
+            ),
+          ),
+        ),
+        child: Text(singleKey),
       ),
-      child: Text(singleKey),
     );
   }
 }

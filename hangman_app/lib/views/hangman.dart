@@ -7,6 +7,7 @@ import 'package:hangman_app/models/difficulties_model.dart';
 import 'package:hangman_app/models/words_model.dart';
 import 'package:hangman_app/widgets/hangman/game_display.dart';
 import 'package:hangman_app/widgets/hangman/game_logic.dart';
+import 'package:hangman_app/widgets/hangman/hangmanFigure.dart';
 
 class HangmanView extends StatefulWidget {
   final Language language;
@@ -31,15 +32,13 @@ class _HangmanViewState extends State<HangmanView> {
     super.initState();
   }
 
-  void handleKeyPress(String key) {
+  bool handleKeyPress(String key) {
     bool correct;
-    print('Pressed: $key');
-    correct = isCorrect(key);
+    correct = gameLogic.guessLetter(key);
     setState(() {
       displayWord = gameLogic.getDisplayWord();
     });
-    print('hangman.dart');
-    print(correct);
+    return correct;
   }
 
   bool isCorrect(String key){
@@ -51,11 +50,20 @@ class _HangmanViewState extends State<HangmanView> {
     return Scaffold(
       body: Column(
         children: [
-          GameDisplay(displayWord: displayWord),
+          Expanded(
+            child: Column(
+              children: [
+                GameDisplay(displayWord: displayWord),
+                HangmanFigure(lives: 0),
+              ],
+            )),
+          
+          
           OnScreenKeyboard(
               language: widget.language.name,
               onKeyPress: handleKeyPress,
-          )
+          ),
+          SizedBox(height: 20,)
         ],
       ),
     );

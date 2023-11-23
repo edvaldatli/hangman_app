@@ -1,6 +1,8 @@
 import 'package:hangman_app/models/difficulties_model.dart';
 
 class GameLogic {
+  int lives = 7;
+
   late List<String> gameWord;
   late Set<String> guessedLetters;
   late List<String> displayWord;
@@ -21,7 +23,7 @@ class GameLogic {
 
     for (int i = 0; i < gameWord.length; i++) {
       if (lowerGuessedLetter == gameWord[i].toLowerCase()) {
-        displayWord[i] = gameWord[i];
+        displayWord[i] = gameWord[i].toUpperCase();
         isCorrect = true;
       }
     }
@@ -29,7 +31,7 @@ class GameLogic {
     if (!isCorrect) {
       guessedLetters.add(lowerGuessedLetter);
     }
-    
+
     return isCorrect;
   }
 

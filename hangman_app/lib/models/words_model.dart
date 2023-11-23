@@ -138,6 +138,131 @@ class Words {
         wordString: "synecdoche",
         level: DifficultyLevel.Hard,
         language: Language.English),
+    // Easy level Icelandic words
+    Word(
+        wordString: "bók",
+        level: DifficultyLevel.Easy,
+        language: Language.Icelandic),
+    Word(
+        wordString: "hús",
+        level: DifficultyLevel.Easy,
+        language: Language.Icelandic),
+    Word(
+        wordString: "fiskur",
+        level: DifficultyLevel.Easy,
+        language: Language.Icelandic),
+    Word(
+        wordString: "kaka",
+        level: DifficultyLevel.Easy,
+        language: Language.Icelandic),
+    Word(
+        wordString: "blóm",
+        level: DifficultyLevel.Easy,
+        language: Language.Icelandic),
+    Word(
+        wordString: "hundur",
+        level: DifficultyLevel.Easy,
+        language: Language.Icelandic),
+    Word(
+        wordString: "köttur",
+        level: DifficultyLevel.Easy,
+        language: Language.Icelandic),
+    Word(
+        wordString: "peningar",
+        level: DifficultyLevel.Easy,
+        language: Language.Icelandic),
+    Word(
+        wordString: "skóli",
+        level: DifficultyLevel.Easy,
+        language: Language.Icelandic),
+    Word(
+        wordString: "matur",
+        level: DifficultyLevel.Easy,
+        language: Language.Icelandic),
+
+// Intermediate level Icelandic words
+    Word(
+        wordString: "tölva",
+        level: DifficultyLevel.Intermediate,
+        language: Language.Icelandic),
+    Word(
+        wordString: "bíllinn",
+        level: DifficultyLevel.Intermediate,
+        language: Language.Icelandic),
+    Word(
+        wordString: "fjallganga",
+        level: DifficultyLevel.Intermediate,
+        language: Language.Icelandic),
+    Word(
+        wordString: "eldgos",
+        level: DifficultyLevel.Intermediate,
+        language: Language.Icelandic),
+    Word(
+        wordString: "veitingastaður",
+        level: DifficultyLevel.Intermediate,
+        language: Language.Icelandic),
+    Word(
+        wordString: "bókasafn",
+        level: DifficultyLevel.Intermediate,
+        language: Language.Icelandic),
+    Word(
+        wordString: "sími",
+        level: DifficultyLevel.Intermediate,
+        language: Language.Icelandic),
+    Word(
+        wordString: "jól",
+        level: DifficultyLevel.Intermediate,
+        language: Language.Icelandic),
+    Word(
+        wordString: "heimili",
+        level: DifficultyLevel.Intermediate,
+        language: Language.Icelandic),
+    Word(
+        wordString: "fjölskylda",
+        level: DifficultyLevel.Intermediate,
+        language: Language.Icelandic),
+
+// Hard level Icelandic words
+    Word(
+        wordString: "samvinnufélag",
+        level: DifficultyLevel.Hard,
+        language: Language.Icelandic),
+    Word(
+        wordString: "landfræðilegur",
+        level: DifficultyLevel.Hard,
+        language: Language.Icelandic),
+    Word(
+        wordString: "menningarmiðstöð",
+        level: DifficultyLevel.Hard,
+        language: Language.Icelandic),
+    Word(
+        wordString: "umhverfisvernd",
+        level: DifficultyLevel.Hard,
+        language: Language.Icelandic),
+    Word(
+        wordString: "fjármálakerfi",
+        level: DifficultyLevel.Hard,
+        language: Language.Icelandic),
+    Word(
+        wordString: "sveitarstjórn",
+        level: DifficultyLevel.Hard,
+        language: Language.Icelandic),
+    Word(
+        wordString: "rafmagnsveita",
+        level: DifficultyLevel.Hard,
+        language: Language.Icelandic),
+    Word(
+        wordString: "þjóðsöngur",
+        level: DifficultyLevel.Hard,
+        language: Language.Icelandic),
+    Word(
+        wordString: "framkvæmdastjóri",
+        level: DifficultyLevel.Hard,
+        language: Language.Icelandic),
+    Word(
+        wordString: "einkaleyfi",
+        level: DifficultyLevel.Hard,
+        language: Language.Icelandic),
   ];
 
   List<Word> getWordsByLanguageAndDifficulty(
