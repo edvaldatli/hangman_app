@@ -21,18 +21,25 @@ class HangmanView extends StatefulWidget {
 
 class _HangmanViewState extends State<HangmanView> {
   late GameLogic gameLogic;
+  late String displayWord = gameLogic.getDisplayWord();
 
   @override
   void initState() {
-    super.initState();
     gameLogic = GameLogic(widget.language.name, widget.difficulty,
         words.getRandomWord(widget.language, widget.difficulty)!.wordString);
+    displayWord = gameLogic.getDisplayWord();
+    super.initState();
   }
 
   void handleKeyPress(String key) {
     bool correct;
     print('Pressed: $key');
     correct = isCorrect(key);
+    setState(() {
+      displayWord = gameLogic.getDisplayWord();
+    });
+    print('hangman.dart');
+    print(correct);
   }
 
   bool isCorrect(String key){
@@ -44,11 +51,10 @@ class _HangmanViewState extends State<HangmanView> {
     return Scaffold(
       body: Column(
         children: [
-          GameDisplay(displayWord: gameLogic.getDisplayWord()),
+          GameDisplay(displayWord: displayWord),
           OnScreenKeyboard(
               language: widget.language.name,
               onKeyPress: handleKeyPress,
-              isCorrect: isCorrect,
           )
         ],
       ),
