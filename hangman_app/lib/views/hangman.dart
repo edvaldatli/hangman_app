@@ -30,10 +30,13 @@ class _HangmanViewState extends State<HangmanView> {
   }
 
   void handleKeyPress(String key) {
+    bool correct;
     print('Pressed: $key');
-    bool isCorrect = gameLogic.guessLetter(key);
-    // Now, depending on if the guess is correct, you would update the UI or handle the game logic accordingly
-    // You do not need to pass isCorrect back to the keyboard, you only need to update the state of the keys in this function.
+    correct = isCorrect(key);
+  }
+
+  bool isCorrect(String key){
+    return gameLogic.guessLetter(key);
   }
 
   @override
@@ -45,6 +48,7 @@ class _HangmanViewState extends State<HangmanView> {
           OnScreenKeyboard(
               language: widget.language.name,
               onKeyPress: handleKeyPress,
+              isCorrect: isCorrect,
           )
         ],
       ),

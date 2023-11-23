@@ -16,8 +16,9 @@ final Map<String, List<List<String>>> keyboardLayouts = {
 class OnScreenKeyboard extends StatefulWidget {
   final String language;
   final Function(String key) onKeyPress;
+  final bool Function(String key) isCorrect;
 
-  OnScreenKeyboard({Key? key, required this.language, required this.onKeyPress})
+  OnScreenKeyboard({Key? key, required this.language, required this.onKeyPress, required this.isCorrect})
       : super(key: key);
 
   @override
@@ -29,14 +30,13 @@ class OnScreenKeyboardState extends State<OnScreenKeyboard> {
   Map<String, Color> keyColors = {};
 
   void _handleKeyPress(String key) {
-    // Call the onKeyPress method given by the parent widget,
-    // which will return if the guess is correct or not.
-    bool isCorrect = widget.onKeyPress(key);
-
-    // Update the color of the key based on the guess.
     setState(() {
-      keyColors[key] = isCorrect ? Colors.green : Colors.red;
+      keyColors[key] = _isCorrect(key) ? Colors.green : Colors.red;
     });
+  }
+
+  bool _isCorrect(String key){
+    return widget.isCorrect(key);
   }
 
   @override
@@ -56,7 +56,8 @@ class OnScreenKeyboardState extends State<OnScreenKeyboard> {
                       child: KeyboardKey(
                         singleKey: key,
                         color: keyColors[key] ?? Colors.grey,
-                        onKeyPress: _handleKeyPress
+                        onKeyPress: _handleKeyPress,
+                        isCorrect: _isCorrect,
                       ),
                     ),
                   );
@@ -72,11 +73,13 @@ class KeyboardKey extends StatelessWidget {
   final String singleKey;
   final Function(String) onKeyPress;
   final Color color;
+  final bool Function(String) isCorrect;
 
   const KeyboardKey({
     Key? key,
     required this.singleKey,
     required this.onKeyPress,
+    required this.isCorrect,
     this.color = Colors.white,
   }) : super(key: key);
 
