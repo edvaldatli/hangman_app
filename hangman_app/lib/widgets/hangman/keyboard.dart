@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 
 final Map<String, List<List<String>>> keyboardLayouts = {
-    'English': [
-      ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-      ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-      ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
-    ],
-    'Icelandic': [
-      ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Ð'],
-      ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Æ'],
-      ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Þ']
-    ],
-    'IcelandicExtra':[
-      ['É', 'Ý', 'Ú', 'Í', 'Ó', 'Á'],
-    ]
-  };
+  'English': [
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+  ],
+  'Icelandic': [
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Ð'],
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Æ'],
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Þ'],
+    ['É', 'Ý', 'Ú', 'Í', 'Ó', 'Á'],
+    
+  ],
+  'IcelandicExtra': [
+    ['É', 'Ý', 'Ú', 'Í', 'Ó', 'Á'],
+    ['Back']
+  ]
+};
 
 class OnScreenKeyboard extends StatefulWidget {
   final String language;
   final bool Function(String key) onKeyPress;
 
-  OnScreenKeyboard({Key? key, required this.language, required this.onKeyPress})
+  const OnScreenKeyboard(
+      {Key? key, required this.language, required this.onKeyPress})
       : super(key: key);
 
   @override
@@ -28,6 +32,7 @@ class OnScreenKeyboard extends StatefulWidget {
 }
 
 class OnScreenKeyboardState extends State<OnScreenKeyboard> {
+  
   Map<String, Color> keyColors = {};
 
   bool handleKeyPress(String key) {
@@ -37,8 +42,6 @@ class OnScreenKeyboardState extends State<OnScreenKeyboard> {
     });
     return isCorrect;
   }
-
-  // !TODO SWITCH TO EXTRA CHARACTERS KEYBOARD
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +54,10 @@ class OnScreenKeyboardState extends State<OnScreenKeyboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: row.map((key) {
                   return Flexible(
-                    child: Container(
-                      child: KeyboardKey(
-                        singleKey: key,
-                        color: keyColors[key] ?? Colors.white10,
-                        onKeyPress: handleKeyPress,
-                      ),
+                    child: KeyboardKey(
+                      singleKey: key,
+                      color: keyColors[key] ?? Colors.white10,
+                      onKeyPress: handleKeyPress,
                     ),
                   );
                 }).toList(),
@@ -88,7 +89,8 @@ class KeyboardKey extends StatelessWidget {
           onKeyPress(singleKey);
         },
         style: ButtonStyle(
-          padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 0, vertical: 15)),
+          padding: const MaterialStatePropertyAll(
+              EdgeInsets.symmetric(horizontal: 10, vertical: 15)),
           backgroundColor: MaterialStatePropertyAll(color),
           shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(

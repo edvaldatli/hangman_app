@@ -7,9 +7,10 @@ class GameLogic {
   late Set<String> guessedLetters;
   late List<String> displayWord;
 
-  // The current language and difficulty of the game
   String language;
   DifficultyLevel difficulty;
+
+  // Todo: Add icelandic characters to be associated with the "same" character
 
   GameLogic(this.language, this.difficulty, String word) {
     gameWord = word.split('');

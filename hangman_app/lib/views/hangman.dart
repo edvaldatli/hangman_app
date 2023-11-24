@@ -7,20 +7,20 @@ import 'package:hangman_app/models/difficulties_model.dart';
 import 'package:hangman_app/models/words_model.dart';
 import 'package:hangman_app/widgets/hangman/game_display.dart';
 import 'package:hangman_app/widgets/hangman/game_logic.dart';
-import 'package:hangman_app/widgets/hangman/hangmanFigure.dart';
+import 'package:hangman_app/widgets/hangman/hangman_figure.dart';
 
 class HangmanView extends StatefulWidget {
   final Language language;
   final DifficultyLevel difficulty;
 
-  HangmanView({Key? key, required this.language, required this.difficulty})
+  const HangmanView({Key? key, required this.language, required this.difficulty})
       : super(key: key);
 
   @override
-  _HangmanViewState createState() => _HangmanViewState();
+  HangmanViewState createState() => HangmanViewState();
 }
 
-class _HangmanViewState extends State<HangmanView> {
+class HangmanViewState extends State<HangmanView> {
   late GameLogic gameLogic;
   late String displayWord = gameLogic.getDisplayWord();
 
@@ -54,7 +54,7 @@ class _HangmanViewState extends State<HangmanView> {
             child: Column(
               children: [
                 GameDisplay(displayWord: displayWord),
-                HangmanFigure(lives: 0),
+                const HangmanFigure(lives: 0),
               ],
             )),
           
@@ -63,7 +63,7 @@ class _HangmanViewState extends State<HangmanView> {
               language: widget.language.name,
               onKeyPress: handleKeyPress,
           ),
-          SizedBox(height: 20,)
+          const SizedBox(height: 20,)
         ],
       ),
     );

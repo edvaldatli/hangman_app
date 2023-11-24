@@ -11,13 +11,14 @@ class HomeView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => HomeViewState();
-  HomeView({required this.initialDifficulty, required this.initialLanguage});
+  const HomeView({super.key, required this.initialDifficulty, required this.initialLanguage});
 }
 
 class HomeViewState extends State<HomeView> {
   late DifficultyLevel currentDifficulty;
   late Language currentLanguage;
 
+  @override
   void initState() {
     super.initState();
     currentDifficulty = widget.initialDifficulty;
@@ -62,7 +63,7 @@ class HomeViewState extends State<HomeView> {
           StartButton(),
           const SizedBox(height: 20),
           ChangeDifficultyButton(context),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           ChangeLanguageButton(context)
         ],
       ),

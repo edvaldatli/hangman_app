@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HangmanFigure extends StatelessWidget {
   final int lives;
 
-  HangmanFigure({super.key, required this.lives});
+  const HangmanFigure({super.key, required this.lives});
 
   @override
   Widget build(BuildContext context) {
