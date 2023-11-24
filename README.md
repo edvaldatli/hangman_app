@@ -1,13 +1,12 @@
 # Hangman App
 
-Welcome to the Hangman App – a fun and interactive way to play the classic word game right on your devices! This application offers a digital twist on the traditional paper-and-pencil guessing game.
+Welcome to the Hangman App – a fun and interactive way to play the classic word game.
 
 ## Features
 
 - **Multiple Languages**: Enjoy the game in English and Icelandic!
 - **Difficulty Levels**: Choose from Easy, Intermediate, and Hard words to challenge yourself.
 - **Interactive Keyboard**: Use the on-screen keyboard to guess the letters.
-- **Lives System**: Make the game exciting with a limited number of guesses.
 - **Dynamic Hangman Visuals**: Watch as the hangman figure is progressively drawn with each incorrect guess.
 
 ## Installation
