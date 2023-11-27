@@ -18,12 +18,17 @@ class GameLogic {
     displayWord = List.filled(gameWord.length, '_');
   }
 
+  String icelandicCharToEnglishChar(String char){
+    if(language == Language.Icelandic){
+      return IcelandicToEnglish(char)!.toLowerCase();
+    } else {
+      return '';
+    }
+  }
+
   bool guessLetter(String guessedLetter) {
     bool isCorrect = false;
-    String icelandicToEnglishChar = '';
-    if(language == Language.Icelandic){
-      icelandicToEnglishChar = IcelandicToEnglish(guessedLetter)!.toLowerCase();
-    }
+    String icelandicToEnglishChar = icelandicCharToEnglishChar(guessedLetter);
     
     String lowerGuessedLetter = guessedLetter.toLowerCase();
 

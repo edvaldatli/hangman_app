@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:hangman_app/widgets/hangman/keyboard.dart';
+import 'end.dart';
+
 import 'package:hangman_app/models/language_model.dart';
 import 'package:hangman_app/models/difficulties_model.dart';
-
 import 'package:hangman_app/models/words_model.dart';
+
+import 'package:hangman_app/widgets/hangman/keyboard.dart';
 import 'package:hangman_app/widgets/hangman/game_display.dart';
 import 'package:hangman_app/widgets/hangman/game_logic.dart';
 import 'package:hangman_app/widgets/hangman/hangman_figure.dart';
@@ -38,17 +40,28 @@ class HangmanViewState extends State<HangmanView> {
     setState(() {
       displayWord = gameLogic.getDisplayWord();
     });
-    print(checkIfDone());
+    checkIfDone();
     return correct;
   }
 
-  bool checkIfDone(){
-    if(displayWord == gameLogic.gameWord.join(' ')){
-      return true;
-    } else if (gameLogic.wrongCounter > 5){
-      return true;
-    } else {
-      return false;
+  void checkIfDone(){
+    String cleanDisplayWord = displayWord.replaceAll(' ', '').toLowerCase();
+    String cleanGameWord = gameLogic.gameWord.join('');
+
+    if(cleanDisplayWord == cleanGameWord){
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder:(context) => EndView(),
+        )
+      );
+    } else if (gameLogic.wrongCounter > 6){
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder:(context) => EndView()
+        )
+      );
     }
   }
 
