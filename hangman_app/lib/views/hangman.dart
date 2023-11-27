@@ -26,7 +26,7 @@ class HangmanViewState extends State<HangmanView> {
 
   @override
   void initState() {
-    gameLogic = GameLogic(widget.language.name, widget.difficulty,
+    gameLogic = GameLogic(widget.language, widget.difficulty,
         words.getRandomWord(widget.language, widget.difficulty)!.wordString);
     displayWord = gameLogic.getDisplayWord();
     super.initState();

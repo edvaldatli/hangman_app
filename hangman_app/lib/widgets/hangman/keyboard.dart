@@ -10,12 +10,6 @@ final Map<String, List<List<String>>> keyboardLayouts = {
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Ð'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Æ'],
     ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Þ'],
-    ['É', 'Ý', 'Ú', 'Í', 'Ó', 'Á'],
-    
-  ],
-  'IcelandicExtra': [
-    ['É', 'Ý', 'Ú', 'Í', 'Ó', 'Á'],
-    ['Back']
   ]
 };
 

@@ -1,4 +1,6 @@
 import 'package:hangman_app/models/difficulties_model.dart';
+import 'package:hangman_app/models/language_model.dart';
+import 'icelandic_characters.dart';
 
 class GameLogic {
   int lives = 7;
@@ -7,10 +9,8 @@ class GameLogic {
   late Set<String> guessedLetters;
   late List<String> displayWord;
 
-  String language;
+  Language language;
   DifficultyLevel difficulty;
-
-  // Todo: Add icelandic characters to be associated with the "same" character
 
   GameLogic(this.language, this.difficulty, String word) {
     gameWord = word.split('');
@@ -20,18 +20,24 @@ class GameLogic {
 
   bool guessLetter(String guessedLetter) {
     bool isCorrect = false;
+    String icelandicToEnglishChar = '';
+    if(language == Language.Icelandic){
+      icelandicToEnglishChar = IcelandicToEnglish(guessedLetter)!.toLowerCase();
+    }
+    
     String lowerGuessedLetter = guessedLetter.toLowerCase();
 
+    // Loops through the gameWord to check if the gameWord includes the guessed letter.
+    // Loop also incorporates Icelandic characters and will show both kind of letters.
+    // Example: User guesses character U. Loop checks both U and Ú
     for (int i = 0; i < gameWord.length; i++) {
-      if (lowerGuessedLetter == gameWord[i].toLowerCase()) {
+      if (lowerGuessedLetter == gameWord[i].toLowerCase() || icelandicToEnglishChar == gameWord[i].toLowerCase()) {
         displayWord[i] = gameWord[i].toUpperCase();
         isCorrect = true;
       }
     }
 
-    if (!isCorrect) {
-      guessedLetters.add(lowerGuessedLetter);
-    }
+    guessedLetters.add(lowerGuessedLetter);
 
     return isCorrect;
   }
