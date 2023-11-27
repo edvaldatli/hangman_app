@@ -77,14 +77,14 @@ class KeyboardKey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(3, 3, 3, 3),
+      padding: const EdgeInsets.fromLTRB(3, 4, 3, 3),
       child: ElevatedButton(
         onPressed: () {
           onKeyPress(singleKey);
         },
         style: ButtonStyle(
           padding: const MaterialStatePropertyAll(
-              EdgeInsets.symmetric(horizontal: 10, vertical: 15)),
+              EdgeInsets.symmetric(horizontal: 10, vertical: 20)),
           backgroundColor: MaterialStatePropertyAll(color),
           shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(

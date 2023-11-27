@@ -3,7 +3,7 @@ import 'package:hangman_app/models/language_model.dart';
 import 'icelandic_characters.dart';
 
 class GameLogic {
-  int lives = 7;
+  int wrongCounter = 0;
 
   late List<String> gameWord;
   late Set<String> guessedLetters;
@@ -38,6 +38,10 @@ class GameLogic {
     }
 
     guessedLetters.add(lowerGuessedLetter);
+
+    if(!isCorrect){
+      wrongCounter++;
+    }
 
     return isCorrect;
   }

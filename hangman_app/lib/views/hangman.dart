@@ -38,7 +38,18 @@ class HangmanViewState extends State<HangmanView> {
     setState(() {
       displayWord = gameLogic.getDisplayWord();
     });
+    print(checkIfDone());
     return correct;
+  }
+
+  bool checkIfDone(){
+    if(displayWord == gameLogic.gameWord.join(' ')){
+      return true;
+    } else if (gameLogic.wrongCounter > 5){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   bool isCorrect(String key){
@@ -54,7 +65,7 @@ class HangmanViewState extends State<HangmanView> {
             child: Column(
               children: [
                 GameDisplay(displayWord: displayWord),
-                const HangmanFigure(lives: 0),
+                Expanded(child: HangmanFigure(lives: gameLogic.wrongCounter)),
               ],
             )),
           
