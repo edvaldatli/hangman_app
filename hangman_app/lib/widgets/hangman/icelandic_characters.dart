@@ -1,5 +1,5 @@
-String? IcelandicToEnglish (String char) {
-  Map <String, String> characters = {
+String? IcelandicToEnglish(String char) {
+  Map<String, String> characters = {
     'A': 'Á',
     'E': 'É',
     'Y': 'Ý',
@@ -8,7 +8,7 @@ String? IcelandicToEnglish (String char) {
     'O': 'Ó',
   };
 
-  if(characters.containsKey(char)){
+  if (characters.containsKey(char)) {
     return characters[char];
   } else {
     return '';

@@ -18,18 +18,19 @@ class GameLogic {
     displayWord = List.filled(gameWord.length, '_');
   }
 
-  String icelandicCharToEnglishChar(String char){
-    if(language == Language.Icelandic){
+  String icelandicCharToEnglishChar(String char) {
+    if (language == Language.Icelandic) {
       return IcelandicToEnglish(char)!.toLowerCase();
     } else {
       return '';
     }
   }
 
-  bool isCorrect(String guessedLetter){
+  bool isCorrect(String guessedLetter) {
     String guessed = guessedLetter.toLowerCase();
-    String icelandicChar = icelandicCharToEnglishChar(guessedLetter.toUpperCase()).toLowerCase();
-    if(gameWord.contains(guessed) || gameWord.contains(icelandicChar)){
+    String icelandicChar =
+        icelandicCharToEnglishChar(guessedLetter.toUpperCase()).toLowerCase();
+    if (gameWord.contains(guessed) || gameWord.contains(icelandicChar)) {
       return true;
     } else {
       return false;
@@ -38,7 +39,7 @@ class GameLogic {
 
   bool checkIfAlreadyGuessed(String guessedLetter) {
     String guessed = guessedLetter.toLowerCase();
-    if(guessedLetters.contains(guessed)){
+    if (guessedLetters.contains(guessed)) {
       return true;
     } else {
       return false;
@@ -49,14 +50,14 @@ class GameLogic {
     String icelandicToEnglishChar = icelandicCharToEnglishChar(guessedLetter);
     String lowerGuessedLetter = guessedLetter.toLowerCase();
 
-    if(checkIfAlreadyGuessed(lowerGuessedLetter)){
+    if (checkIfAlreadyGuessed(lowerGuessedLetter)) {
       return;
-    } else if (isCorrect(lowerGuessedLetter)){
+    } else if (isCorrect(lowerGuessedLetter)) {
       for (int i = 0; i < gameWord.length; i++) {
-        if(lowerGuessedLetter == gameWord[i].toLowerCase() || icelandicToEnglishChar == gameWord[i].toLowerCase()){
+        if (lowerGuessedLetter == gameWord[i].toLowerCase() ||
+            icelandicToEnglishChar == gameWord[i].toLowerCase()) {
           displayWord[i] = gameWord[i].toUpperCase();
         }
-        
       }
       guessedLetters.add(lowerGuessedLetter);
     } else {

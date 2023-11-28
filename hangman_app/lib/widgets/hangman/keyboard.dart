@@ -26,7 +26,6 @@ class OnScreenKeyboard extends StatefulWidget {
 }
 
 class OnScreenKeyboardState extends State<OnScreenKeyboard> {
-  
   Map<String, Color> keyColors = {};
 
   bool handleKeyPress(String key) {

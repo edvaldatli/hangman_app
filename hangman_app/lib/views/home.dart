@@ -11,7 +11,10 @@ class HomeView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => HomeViewState();
-  const HomeView({super.key, required this.initialDifficulty, required this.initialLanguage});
+  const HomeView(
+      {super.key,
+      required this.initialDifficulty,
+      required this.initialLanguage});
 }
 
 class HomeViewState extends State<HomeView> {
@@ -74,7 +77,8 @@ class HomeViewState extends State<HomeView> {
     return FilledButton.tonal(
         onPressed: () =>
             showLanguageModal(context, currentLanguage, onLanguageSelected),
-        child: (const Text('Change Language')));
+        child: (const Text('Change Language'))
+      );
   }
 
   FilledButton ChangeDifficultyButton(BuildContext context) {
@@ -91,7 +95,11 @@ class HomeViewState extends State<HomeView> {
         padding: MaterialStatePropertyAll(EdgeInsets.fromLTRB(40, 10, 40, 10)),
       ),
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HangmanView(language: currentLanguage, difficulty: currentDifficulty)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HangmanView(
+                    language: currentLanguage, difficulty: currentDifficulty)));
       },
       child: Column(
         children: [

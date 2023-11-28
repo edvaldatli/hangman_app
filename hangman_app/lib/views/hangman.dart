@@ -15,7 +15,8 @@ class HangmanView extends StatefulWidget {
   final Language language;
   final DifficultyLevel difficulty;
 
-  const HangmanView({Key? key, required this.language, required this.difficulty})
+  const HangmanView(
+      {Key? key, required this.language, required this.difficulty})
       : super(key: key);
 
   @override
@@ -23,20 +24,18 @@ class HangmanView extends StatefulWidget {
 }
 
 class HangmanViewState extends State<HangmanView> {
-  late GameLogic gameLogic = GameLogic(widget.language, widget.difficulty, words.getRandomWord(widget.language, widget.difficulty)!.wordString);
+  late GameLogic gameLogic = GameLogic(widget.language, widget.difficulty,
+      words.getRandomWord(widget.language, widget.difficulty)!.wordString);
   late String displayWord = gameLogic.getDisplayWord();
 
   @override
   void initState() {
-    print(displayWord);
-    print(gameLogic.gameWord);
     super.initState();
   }
 
   bool handleKeyPress(String key) {
     bool correct;
     correct = gameLogic.isCorrect(key);
-    print(correct);
     setState(() {
       gameLogic.guessLetter(key);
       displayWord = gameLogic.getDisplayWord();
@@ -45,23 +44,19 @@ class HangmanViewState extends State<HangmanView> {
     return correct;
   }
 
-  void checkIfDone(){
+  void checkIfDone() {
     String cleanDisplayWord = displayWord.replaceAll(' ', '').toLowerCase();
     String cleanGameWord = gameLogic.gameWord.join('');
 
-    print(cleanDisplayWord);
-    print(cleanGameWord);
-
-    if(cleanDisplayWord == cleanGameWord || gameLogic.wrongCounter > 6){
+    if (cleanDisplayWord == cleanGameWord || gameLogic.wrongCounter > 6) {
       Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder:(context) => EndView(
-            gameLogic: gameLogic,
-            winner: cleanDisplayWord == cleanGameWord,
-          ),
-        )
-      );
+          context,
+          MaterialPageRoute(
+            builder: (context) => EndView(
+              gameLogic: gameLogic,
+              winner: cleanDisplayWord == cleanGameWord,
+            ),
+          ));
     }
   }
 
@@ -82,19 +77,19 @@ class HangmanViewState extends State<HangmanView> {
           child: Column(
             children: [
               Expanded(
-                child: Column(
-                  children: [
-                    GameDisplay(displayWord: displayWord),
-                    Expanded(child: HangmanFigure(lives: gameLogic.wrongCounter)),
-                  ],
-                )),
-              
-              
+                  child: Column(
+                children: [
+                  GameDisplay(displayWord: displayWord),
+                  Expanded(child: HangmanFigure(lives: gameLogic.wrongCounter)),
+                ],
+              )),
               OnScreenKeyboard(
-                  language: widget.language.name,
-                  onKeyPress: handleKeyPress,
+                language: widget.language.name,
+                onKeyPress: handleKeyPress,
               ),
-              const SizedBox(height: 20,)
+              const SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),
