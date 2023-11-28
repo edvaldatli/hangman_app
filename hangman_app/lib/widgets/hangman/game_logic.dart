@@ -6,7 +6,7 @@ class GameLogic {
   int wrongCounter = 0;
 
   late List<String> gameWord;
-  late Set<String> guessedLetters;
+  late List<String> guessedLetters;
   late List<String> displayWord;
 
   Language language;
@@ -14,7 +14,7 @@ class GameLogic {
 
   GameLogic(this.language, this.difficulty, String word) {
     gameWord = word.split('');
-    guessedLetters = {};
+    guessedLetters = [];
     displayWord = List.filled(gameWord.length, '_');
   }
 
@@ -26,29 +26,43 @@ class GameLogic {
     }
   }
 
-  bool guessLetter(String guessedLetter) {
-    bool isCorrect = false;
+  bool isCorrect(String guessedLetter){
+    String guessed = guessedLetter.toLowerCase();
+    String icelandicChar = icelandicCharToEnglishChar(guessedLetter.toUpperCase()).toLowerCase();
+    if(gameWord.contains(guessed) || gameWord.contains(icelandicChar)){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool checkIfAlreadyGuessed(String guessedLetter) {
+    String guessed = guessedLetter.toLowerCase();
+    if(guessedLetters.contains(guessed)){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void guessLetter(String guessedLetter) {
     String icelandicToEnglishChar = icelandicCharToEnglishChar(guessedLetter);
-    
     String lowerGuessedLetter = guessedLetter.toLowerCase();
 
-    // Loops through the gameWord to check if the gameWord includes the guessed letter.
-    // Loop also incorporates Icelandic characters and will show both kind of letters.
-    // Example: User guesses character U. Loop checks both U and Ú
-    for (int i = 0; i < gameWord.length; i++) {
-      if (lowerGuessedLetter == gameWord[i].toLowerCase() || icelandicToEnglishChar == gameWord[i].toLowerCase()) {
-        displayWord[i] = gameWord[i].toUpperCase();
-        isCorrect = true;
+    if(checkIfAlreadyGuessed(lowerGuessedLetter)){
+      return;
+    } else if (isCorrect(lowerGuessedLetter)){
+      for (int i = 0; i < gameWord.length; i++) {
+        if(lowerGuessedLetter == gameWord[i].toLowerCase() || icelandicToEnglishChar == gameWord[i].toLowerCase()){
+          displayWord[i] = gameWord[i].toUpperCase();
+        }
+        
       }
-    }
-
-    guessedLetters.add(lowerGuessedLetter);
-
-    if(!isCorrect){
+      guessedLetters.add(lowerGuessedLetter);
+    } else {
       wrongCounter++;
+      guessedLetters.add(lowerGuessedLetter);
     }
-
-    return isCorrect;
   }
 
   String getDisplayWord() {

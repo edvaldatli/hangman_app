@@ -8,7 +8,7 @@ class EndView extends StatefulWidget{
   final bool winner;
   final GameLogic gameLogic;
 
-  const EndView({required this.winner, required this.gameLogic});
+  const EndView({super.key, required this.winner, required this.gameLogic});
 
   @override
   EndViewState createState() => EndViewState();
@@ -17,6 +17,7 @@ class EndView extends StatefulWidget{
 class EndViewState extends State<EndView>{
   late GameLogic gameLogic = widget.gameLogic;
   late String gameWord = widget.gameLogic.gameWord.join('');
+  late List<String> guessedLetters = widget.gameLogic.guessedLetters;
   late bool winner = widget.winner;
 
   void backToMenu(){
@@ -43,32 +44,47 @@ class EndViewState extends State<EndView>{
       );
   }
 
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            widget.winner ? 'You won!' : 'You lost :(',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold
+    return WillPopScope(
+      onWillPop: () {
+        return Future.value(false);
+      },
+      child: Scaffold(
+        body: Center(child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              widget.winner ? 'You won!' : 'You lost :(',
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold
+              ),
             ),
-          ),
-          SizedBox(height: 40,),
-          Text(!winner ? 'Your word was:' : ''),
-          Text(
-            gameWord,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold
+            const SizedBox(height: 40,),
+            const Text(
+              'The word was:',
+              style: TextStyle(
+                fontSize: 16,
+              ),
             ),
-          ),
-          SizedBox(height: 70,),
-          ElevatedButton(onPressed: retryGame, child: Text('Retry')),
-          ElevatedButton(onPressed: backToMenu, child: Text('Back to menu'))
-        ],
-      )),
+            Text(
+              gameWord,
+              style: const TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            const SizedBox(height: 40),
+            const Text('You guessed: '),
+            Text(guessedLetters.join(', ')),
+            const SizedBox(height: 70,),
+            FilledButton.icon(onPressed: retryGame, icon: const Icon(Icons.refresh_sharp), label: const Text('Retry'),),
+            const SizedBox(height: 5,),
+            FilledButton.icon(onPressed: backToMenu, icon: const Icon(Icons.home_filled),label: const Text('Back to menu'))
+          ],
+        )),
+      ),
     );
   }
 }

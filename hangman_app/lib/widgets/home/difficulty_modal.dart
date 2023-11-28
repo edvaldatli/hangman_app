@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hangman_app/models/difficulties_model.dart';
 
 
-
-
 void showDifficultyModal(BuildContext context, DifficultyLevel currentDifficulty, void Function(DifficultyLevel) onDifficultySelected) {
-
 
   bool checkDifficulty(DifficultyLevel currDiff, String selectedDiff){
     if(currDiff.name == selectedDiff){
@@ -42,12 +39,16 @@ void showDifficultyModal(BuildContext context, DifficultyLevel currentDifficulty
                       minimumSize: MaterialStateProperty.all(const Size(100, 40)),
                       backgroundColor: checkDifficulty(currentDifficulty, difficulty.name) ? const MaterialStatePropertyAll(Colors.green) : const MaterialStatePropertyAll(Colors.white),
                     ),
-                    child: Text(
-                      difficulty.name,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20
-                      ),
+                    child: Column(
+                      children: [
+                        Text(
+                          difficulty.name,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 20
+                          ),
+                        )
+                      ],
                     ),
                     onPressed: () => onDifficultySelected(difficulty),
                   );

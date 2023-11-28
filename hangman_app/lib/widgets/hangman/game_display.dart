@@ -8,7 +8,7 @@ class GameDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 50, 0, 20),
+      margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
       height: 50,
       alignment: Alignment.center,
       child: Text(

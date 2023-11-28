@@ -23,21 +23,22 @@ class HangmanView extends StatefulWidget {
 }
 
 class HangmanViewState extends State<HangmanView> {
-  late GameLogic gameLogic;
+  late GameLogic gameLogic = GameLogic(widget.language, widget.difficulty, words.getRandomWord(widget.language, widget.difficulty)!.wordString);
   late String displayWord = gameLogic.getDisplayWord();
 
   @override
   void initState() {
-    gameLogic = GameLogic(widget.language, widget.difficulty,
-        words.getRandomWord(widget.language, widget.difficulty)!.wordString);
-    displayWord = gameLogic.getDisplayWord();
+    print(displayWord);
+    print(gameLogic.gameWord);
     super.initState();
   }
 
   bool handleKeyPress(String key) {
     bool correct;
-    correct = gameLogic.guessLetter(key);
+    correct = gameLogic.isCorrect(key);
+    print(correct);
     setState(() {
+      gameLogic.guessLetter(key);
       displayWord = gameLogic.getDisplayWord();
     });
     checkIfDone();
@@ -47,6 +48,9 @@ class HangmanViewState extends State<HangmanView> {
   void checkIfDone(){
     String cleanDisplayWord = displayWord.replaceAll(' ', '').toLowerCase();
     String cleanGameWord = gameLogic.gameWord.join('');
+
+    print(cleanDisplayWord);
+    print(cleanGameWord);
 
     if(cleanDisplayWord == cleanGameWord || gameLogic.wrongCounter > 6){
       Navigator.push(
@@ -61,30 +65,39 @@ class HangmanViewState extends State<HangmanView> {
     }
   }
 
-  bool isCorrect(String key){
-    return gameLogic.guessLetter(key);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: Column(
-              children: [
-                GameDisplay(displayWord: displayWord),
-                Expanded(child: HangmanFigure(lives: gameLogic.wrongCounter)),
-              ],
-            )),
-          
-          
-          OnScreenKeyboard(
-              language: widget.language.name,
-              onKeyPress: handleKeyPress,
+    return WillPopScope(
+      onWillPop: () {
+        return Future.value(false);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Hangman'),
+        ),
+        body: WillPopScope(
+          onWillPop: () {
+            return Future.value(true);
+          },
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    GameDisplay(displayWord: displayWord),
+                    Expanded(child: HangmanFigure(lives: gameLogic.wrongCounter)),
+                  ],
+                )),
+              
+              
+              OnScreenKeyboard(
+                  language: widget.language.name,
+                  onKeyPress: handleKeyPress,
+              ),
+              const SizedBox(height: 20,)
+            ],
           ),
-          const SizedBox(height: 20,)
-        ],
+        ),
       ),
     );
   }

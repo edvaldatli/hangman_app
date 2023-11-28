@@ -9,7 +9,7 @@ class Difficulty {
   final String description;
   Difficulty({required this.level, required this.description});
 
-  static String _getDescription(DifficultyLevel level){
+  String getDescription(DifficultyLevel level){
     switch (level) {
       case DifficultyLevel.Easy:
         return "Suitable for beginners";
