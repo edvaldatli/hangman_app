@@ -9,7 +9,7 @@ final Map<String, List<List<String>>> keyboardLayouts = {
   'Icelandic': [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'Ð'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Æ'],
-    ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Þ'],
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Þ', 'Ö'],
   ]
 };
 

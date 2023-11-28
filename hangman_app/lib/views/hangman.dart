@@ -48,18 +48,14 @@ class HangmanViewState extends State<HangmanView> {
     String cleanDisplayWord = displayWord.replaceAll(' ', '').toLowerCase();
     String cleanGameWord = gameLogic.gameWord.join('');
 
-    if(cleanDisplayWord == cleanGameWord){
+    if(cleanDisplayWord == cleanGameWord || gameLogic.wrongCounter > 6){
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder:(context) => EndView(),
-        )
-      );
-    } else if (gameLogic.wrongCounter > 6){
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder:(context) => EndView()
+          builder:(context) => EndView(
+            gameLogic: gameLogic,
+            winner: cleanDisplayWord == cleanGameWord,
+          ),
         )
       );
     }

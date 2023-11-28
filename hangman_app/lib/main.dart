@@ -12,14 +12,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Hangman',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark
+    return WillPopScope(
+      onWillPop: () async {
+        return Future.value(false);
+      },
+      child: MaterialApp(
+        title: 'Hangman',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+          brightness: Brightness.dark
+        ),
+        home: const HomeView(initialDifficulty: DifficultyLevel.Intermediate, initialLanguage: Language.Icelandic)
       ),
-      home: const HomeView(initialDifficulty: DifficultyLevel.Intermediate, initialLanguage: Language.Icelandic)
     );
   }
 }
