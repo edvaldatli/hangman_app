@@ -11,11 +11,18 @@ class GameDisplay extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
       height: 50,
       alignment: Alignment.center,
-      child: Text(
-        displayWord,
-        style: const TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.center,
+          child: Text(
+            displayWord,
+            style: const TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );
