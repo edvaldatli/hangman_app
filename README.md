@@ -37,4 +37,3 @@ Tap on the letters to make a guess.
 Try to guess the word before the hangman is completely drawn!
 ## Technologies Used
 Flutter for cross-platform app development.
-Dart for the backend logic.
