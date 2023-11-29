@@ -70,7 +70,7 @@ class KeyboardKey extends StatelessWidget {
     Key? key,
     required this.singleKey,
     required this.onKeyPress,
-    this.color = Colors.white,
+    required this.color,
   }) : super(key: key);
 
   @override
@@ -83,7 +83,7 @@ class KeyboardKey extends StatelessWidget {
         },
         style: ButtonStyle(
           padding: const MaterialStatePropertyAll(
-              EdgeInsets.symmetric(horizontal: 10, vertical: 20)),
+              EdgeInsets.symmetric(vertical: 20)),
           backgroundColor: MaterialStatePropertyAll(color),
           shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(

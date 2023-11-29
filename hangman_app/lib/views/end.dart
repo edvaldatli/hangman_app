@@ -76,21 +76,29 @@ class EndViewState extends State<EndView> {
             const SizedBox(
               height: 70,
             ),
-            FilledButton.icon(
-              onPressed: retryGame,
-              icon: const Icon(Icons.refresh_sharp),
-              label: const Text('Retry'),
-            ),
+            retryButton(),
             const SizedBox(
               height: 5,
             ),
-            FilledButton.icon(
-                onPressed: backToMenu,
-                icon: const Icon(Icons.home_filled),
-                label: const Text('Back to menu'))
+            backToMenuButton()
           ],
         )),
       ),
     );
+  }
+
+  FilledButton backToMenuButton() {
+    return FilledButton.icon(
+              onPressed: backToMenu,
+              icon: const Icon(Icons.home_filled),
+              label: const Text('Back to menu'));
+  }
+
+  FilledButton retryButton() {
+    return FilledButton.icon(
+            onPressed: retryGame,
+            icon: const Icon(Icons.refresh_sharp),
+            label: const Text('Retry'),
+          );
   }
 }
