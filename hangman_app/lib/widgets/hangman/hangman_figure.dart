@@ -92,29 +92,4 @@ class HangmanFigure extends StatelessWidget {
       ],
     );
   }
-  /*
-/*
-  Widget _buildHead() {
-    
-  }
-
-  Widget _buildBody() {
-    // Build and return the body widget
-  }
-
-  Widget _buildLeftArm(){
-
-  }
-
-  Widget _buildRightArm(){
-
-  }
-
-  Widget _buildRightLeg(){
-
-  }
-
-  Widget _buildLeftLeg(){
-
-  }*/*/
 }

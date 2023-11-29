@@ -16,7 +16,7 @@ void showDifficultyModal(BuildContext context, DifficultyLevel currentDifficulty
     builder: (BuildContext context) {
       return Container(
         padding: const EdgeInsets.all(40),
-        height: 300,
+        height: 350,
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
@@ -34,23 +34,32 @@ void showDifficultyModal(BuildContext context, DifficultyLevel currentDifficulty
                 itemBuilder: (context, index) {
                   final difficulty = DifficultyLevel.values[index];
             
-                  return ElevatedButton(
-                    style: ButtonStyle(
-                      minimumSize: MaterialStateProperty.all(const Size(100, 40)),
-                      backgroundColor: checkDifficulty(currentDifficulty, difficulty.name) ? const MaterialStatePropertyAll(Colors.green) : const MaterialStatePropertyAll(Colors.white),
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          difficulty.name,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 20
+                  return Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: checkDifficulty(currentDifficulty, difficulty.name) ? const MaterialStatePropertyAll(Colors.green) : const MaterialStatePropertyAll(Colors.white),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            difficulty.name,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20
+                            ),
                           ),
-                        )
-                      ],
+                          Text(
+                            getDescription(difficulty),
+                            style: TextStyle(
+                              color: Colors.black
+                            ),
+                          ),
+                        ],
+                      ),
+                      onPressed: () => onDifficultySelected(difficulty),
                     ),
-                    onPressed: () => onDifficultySelected(difficulty),
                   );
                 },
               ),
