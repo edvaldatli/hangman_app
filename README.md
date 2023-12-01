@@ -8,6 +8,7 @@ Welcome to the Hangman App – a fun and interactive way to play the classic wor
 - **Difficulty Levels**: Choose from Easy, Intermediate, and Hard words to challenge yourself.
 - **Interactive Keyboard**: Use the on-screen keyboard to guess the letters.
 - **Dynamic Hangman Visuals**: Watch as the hangman figure is progressively drawn with each incorrect guess.
+- **API Integration**: Utilizes a custom API for fetching words, hosted at `hangman.edvaldatli.com`. Check out the API repository [here](https://github.com/edvaldatli/hangman_app_api).
 
 ## Installation
 
