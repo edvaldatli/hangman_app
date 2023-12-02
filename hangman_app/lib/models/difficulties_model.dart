@@ -4,19 +4,13 @@ enum DifficultyLevel{
   Hard
 }
 
-class Difficulty {
-  final DifficultyLevel level;
-  final String description;
-  Difficulty({required this.level, required this.description});
-}
-
 String getDescription(DifficultyLevel level){
-    switch (level) {
-      case DifficultyLevel.Easy:
-        return "Suitable for beginners";
-      case DifficultyLevel.Intermediate:
-        return "A bit challenging";
-      case DifficultyLevel.Hard:
-        return "Very challenging";
-    }
+  switch (level) {
+    case DifficultyLevel.Easy:
+      return "Suitable for beginners";
+    case DifficultyLevel.Intermediate:
+      return "A bit challenging";
+    case DifficultyLevel.Hard:
+      return "Very challenging";
   }
+}

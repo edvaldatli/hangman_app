@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hangman_app/views/home.dart';
 
 import 'end.dart';
 
@@ -105,10 +106,19 @@ class HangmanViewState extends State<HangmanView> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Hangman'),
+          title: const Text('Hangman'),
+          centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => HomeView(initialDifficulty: widget.difficulty, initialLanguage: widget.language))
+              );
+            },
+          )
         ),
         body: gameLogic == null 
-        ? Center(child: CircularProgressIndicator()) 
+        ? const Center(child: CircularProgressIndicator()) 
         : WillPopScope(
           onWillPop: () {
             return Future.value(true);

@@ -52,7 +52,7 @@ void showDifficultyModal(BuildContext context, DifficultyLevel currentDifficulty
                           ),
                           Text(
                             getDescription(difficulty),
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black
                             ),
                           ),
