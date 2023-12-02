@@ -41,22 +41,25 @@ class OnScreenKeyboardState extends State<OnScreenKeyboard> {
     var layout = keyboardLayouts[widget.language];
 
     return layout != null
-        ? Column(
-            children: layout.map((row) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: row.map((key) {
-                  return Flexible(
-                    child: KeyboardKey(
-                      singleKey: key,
-                      color: keyColors[key] ?? Colors.white10,
-                      onKeyPress: handleKeyPress,
-                    ),
-                  );
-                }).toList(),
-              );
-            }).toList(),
-          )
+        ? Container(
+          width: MediaQuery.of(context).size.width > 600 ? 400 : MediaQuery.of(context).size.width,
+          child: Column(
+              children: layout.map((row) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: row.map((key) {
+                    return Flexible(
+                      child: KeyboardKey(
+                        singleKey: key,
+                        color: keyColors[key] ?? Colors.white10,
+                        onKeyPress: handleKeyPress,
+                      ),
+                    );
+                  }).toList(),
+                );
+              }).toList(),
+            ),
+        )
         : Container();
   }
 }
