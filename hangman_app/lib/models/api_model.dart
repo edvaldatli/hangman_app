@@ -6,8 +6,7 @@ class Word{
     final response = await http.get(Uri.parse("https://hangman.edvaldatli.com/${language.toLowerCase()}/${difficulty.toLowerCase()}"));
 
     if (response.statusCode == 200){
-      final Map<String, dynamic> data = jsonDecode(response.body);
-      final String word = data['word'];
+      final String word = jsonDecode(response.body);
       return word.toLowerCase();
     } else {
       return '';
