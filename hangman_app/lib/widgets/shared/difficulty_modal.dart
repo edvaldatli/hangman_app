@@ -34,24 +34,25 @@ void showDifficultyModal(BuildContext context, DifficultyLevel currentDifficulty
               'Change Difficulty',
               style: TextStyle(
                 fontSize: 18,
+                fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline
               ),
             ),
             const SizedBox(height: 30),
             Flexible(
               child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: DifficultyLevel.values.length,
                 itemBuilder: (context, index) {
                   final difficulty = DifficultyLevel.values[index];
             
                   return Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.all(6.0),
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: checkDifficulty(currentDifficulty, difficulty.name) ? const MaterialStatePropertyAll(Colors.green) : const MaterialStatePropertyAll(Colors.white),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             difficulty.name,
@@ -60,10 +61,14 @@ void showDifficultyModal(BuildContext context, DifficultyLevel currentDifficulty
                               fontSize: 20
                             ),
                           ),
-                          Text(
-                            getDescription(difficulty),
-                            style: const TextStyle(
-                              color: Colors.black
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 2),
+                            child: Text(
+                              getDescription(difficulty),
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16
+                              ),
                             ),
                           ),
                         ],
