@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:hangman_app/providers/game_logic.dart';
 
 class HangmanFigure extends StatelessWidget {
-  final int lives;
 
-  const HangmanFigure({super.key, required this.lives});
+  const HangmanFigure({super.key});
 
   Widget limbBuilder(BuildContext context, double top, double right,
       String image, double imgHeight) {
@@ -16,13 +18,8 @@ class HangmanFigure extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /*Widget hangknot(){
-      return Positioned(
-        top: 20,
-        left: MediaQuery.of(context).size.width/2 - 50,
-        child: Image.asset('assets/images/hangman_figure/hangknot.png', height: 100, color: Colors.white),
-      );
-    }*/
+    final gameLogic = Provider.of<GameLogicModel>(context, listen: true);
+
     Widget head() {
       return limbBuilder(
           context, 50, 2.7, 'assets/images/hangman_figure/head.png', 100);
@@ -55,8 +52,8 @@ class HangmanFigure extends StatelessWidget {
 
     List<Widget> bodyParts = [];
 
-    if (lives > 0) {
-      for (int i = 0; i < lives; i++) {
+    if (gameLogic.wrongCounter > 0) {
+      for (int i = 0; i < gameLogic.wrongCounter; i++) {
         Widget part;
         switch (i) {
           case 0:

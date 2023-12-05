@@ -1,49 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:hangman_app/views/hangman.dart';
-import 'package:hangman_app/views/home.dart';
+import 'package:provider/provider.dart';
 
-import 'package:hangman_app/widgets/hangman/game_logic.dart';
+import 'package:hangman_app/views/hangman_view.dart';
+import 'package:hangman_app/views/home_view.dart';
 
-class EndView extends StatefulWidget {
-  final bool winner;
-  final GameLogic gameLogic;
+import 'package:hangman_app/providers/game_logic.dart';
 
-  const EndView({super.key, required this.winner, required this.gameLogic});
+class EndViewScreen extends StatefulWidget{
+  const EndViewScreen({super.key});
 
   @override
-  EndViewState createState() => EndViewState();
+  EndViewScreenState createState() => EndViewScreenState();
 }
 
-class EndViewState extends State<EndView> {
-  late GameLogic gameLogic = widget.gameLogic;
-  late String gameWord = widget.gameLogic.gameWord.join('');
-  late List<String> guessedLetters = widget.gameLogic.guessedLetters;
-  late bool winner = widget.winner;
+class EndViewScreenState extends State<EndViewScreen> {
 
   void backToMenu() {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => HomeView(
-            initialDifficulty: gameLogic.difficulty,
-            initialLanguage: gameLogic.language,
-          ),
+          builder: (context) => HomeView(),
         ));
   }
 
   void retryGame() {
-    Navigator.push(
+    Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HangmanView(
-            difficulty: gameLogic.difficulty,
-            language: gameLogic.language,
-          ),
+          builder: (context) => HangmanGameView(),
         ));
   }
 
   @override
   Widget build(BuildContext context) {
+    final gameLogic = Provider.of<GameLogicModel>(context);
     return WillPopScope(
       onWillPop: () {
         return Future.value(false);
@@ -54,8 +44,8 @@ class EndViewState extends State<EndView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              widget.winner ? 'You won!' : 'You lost :(',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              gameLogic.winner ? 'You won!' : 'You lost :(',
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 40,
@@ -67,12 +57,12 @@ class EndViewState extends State<EndView> {
               ),
             ),
             Text(
-              gameWord,
+              gameLogic.gameWord.join(''),
               style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 40),
             const Text('You guessed: '),
-            Text(guessedLetters.join(', ')),
+            Text(gameLogic.guessedLetters.join(', ')),
             const SizedBox(
               height: 70,
             ),

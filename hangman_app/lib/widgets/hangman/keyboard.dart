@@ -41,7 +41,7 @@ class OnScreenKeyboardState extends State<OnScreenKeyboard> {
     var layout = keyboardLayouts[widget.language];
 
     return layout != null
-        ? Container(
+        ? SizedBox(
           width: MediaQuery.of(context).size.width > 600 ? 400 : MediaQuery.of(context).size.width,
           child: Column(
               children: layout.map((row) {

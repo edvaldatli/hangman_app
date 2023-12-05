@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:hangman_app/models/difficulties_model.dart';
+
+import 'package:hangman_app/providers/game_settings.dart';
 
 // This widget opens and lets the user choose what difficulty it wants.
 // It then returns the new difficulty to the passed function "onDifficultySelected" which is then handled inside home.dart.
 
 void showDifficultyModal(BuildContext context, DifficultyLevel currentDifficulty, void Function(DifficultyLevel) onDifficultySelected) {
+  final gameSettings = Provider.of<GameSettingsModel>(context, listen: false);
 
 
   // To check what difficulty is selected.
@@ -63,7 +68,10 @@ void showDifficultyModal(BuildContext context, DifficultyLevel currentDifficulty
                           ),
                         ],
                       ),
-                      onPressed: () => onDifficultySelected(difficulty),
+                      onPressed: () {
+                        gameSettings.setDifficultyLevel(difficulty);
+                        Navigator.pop(context);
+                      },
                     ),
                   );
                 },

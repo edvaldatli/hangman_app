@@ -1,44 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:hangman_app/models/difficulties_model.dart';
-import 'package:hangman_app/views/hangman.dart';
-import 'package:hangman_app/widgets/home/difficulty_modal.dart';
+import 'package:provider/provider.dart';
+
+import 'package:hangman_app/providers/game_settings.dart';
+
+import 'package:hangman_app/views/hangman_view.dart';
+
 import 'package:hangman_app/models/language_model.dart';
-import 'package:hangman_app/widgets/home/language_modal.dart';
+import 'package:hangman_app/models/difficulties_model.dart';
+
+import 'package:hangman_app/widgets/shared/difficulty_modal.dart';
+import 'package:hangman_app/widgets/shared/language_modal.dart';
 
 class HomeView extends StatefulWidget {
-  final DifficultyLevel initialDifficulty;
-  final Language initialLanguage;
-
   @override
   State<StatefulWidget> createState() => HomeViewState();
-  const HomeView(
-      {super.key,
-      required this.initialDifficulty,
-      required this.initialLanguage});
+  const HomeView({
+    super.key,
+  });
 }
 
 class HomeViewState extends State<HomeView> {
-  late DifficultyLevel currentDifficulty;
-  late Language currentLanguage;
-
-  @override
-  void initState() {
-    super.initState();
-    currentDifficulty = widget.initialDifficulty;
-    currentLanguage = widget.initialLanguage;
-  }
-
   void onDifficultySelected(DifficultyLevel difficulty) {
-    setState(() {
-      currentDifficulty = difficulty;
-    });
+    final gameSettings = Provider.of<GameSettingsModel>(context, listen: false);
+    gameSettings.setDifficultyLevel(difficulty);
     Navigator.pop(context);
   }
 
   void onLanguageSelected(Language language) {
-    setState(() {
-      currentLanguage = language;
-    });
+    final gameSettings = Provider.of<GameSettingsModel>(context, listen: false);
+    gameSettings.setLanguage(language);
     Navigator.pop(context);
   }
 
@@ -74,32 +64,34 @@ class HomeViewState extends State<HomeView> {
   }
 
   FilledButton ChangeLanguageButton(BuildContext context) {
+    final gameSettings = Provider.of<GameSettingsModel>(context);
+
     return FilledButton.tonal(
-        onPressed: () =>
-            showLanguageModal(context, currentLanguage, onLanguageSelected),
-        child: (const Text('Change Language'))
-      );
+        onPressed: () => showLanguageModal(
+            context, gameSettings.language, onLanguageSelected),
+        child: (const Text('Change Language')));
   }
 
   FilledButton ChangeDifficultyButton(BuildContext context) {
+    final gameSettings = Provider.of<GameSettingsModel>(context);
+
     return FilledButton.tonal(
-      onPressed: () =>
-          showDifficultyModal(context, currentDifficulty, onDifficultySelected),
+      onPressed: () => showDifficultyModal(
+          context, gameSettings.difficultyLevel, onDifficultySelected),
       child: const Text('Change Difficulty'),
     );
   }
 
   ElevatedButton StartButton() {
+    final gameSettings = Provider.of<GameSettingsModel>(context);
+
     return ElevatedButton(
       style: const ButtonStyle(
         padding: MaterialStatePropertyAll(EdgeInsets.fromLTRB(40, 10, 40, 10)),
       ),
       onPressed: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HangmanView(
-                    language: currentLanguage, difficulty: currentDifficulty)));
+            context, MaterialPageRoute(builder: (context) => HangmanGameView()));
       },
       child: Column(
         children: [
@@ -107,8 +99,8 @@ class HomeViewState extends State<HomeView> {
             'Start!',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          Text(currentDifficulty.name),
-          Text(currentLanguage.name)
+          Text(gameSettings.difficultyLevel.name),
+          Text(gameSettings.language.name)
         ],
       ),
     );
