@@ -7,7 +7,7 @@ enum DifficultyLevel{
 String getDescription(DifficultyLevel level){
   switch (level) {
     case DifficultyLevel.Easy:
-      return "Suitable for beginners";
+      return "Kindergarden stuff";
     case DifficultyLevel.Intermediate:
       return "A bit challenging";
     case DifficultyLevel.Hard:
