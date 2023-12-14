@@ -1,0 +1,7 @@
+
+hangman_app/macos/Runner/GoogleService-Info.plist
+hangman_app/macos/firebase_app_id_file.json
+hangman_app/lib/firebase_options.dart
+hangman_app/ios/firebase_app_id_file.json
+hangman_app/android/app/google-services.json
+hangman_app/ios/Runner/GoogleService-Info.plist
