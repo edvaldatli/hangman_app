@@ -12,6 +12,7 @@ Welcome to the Hangman App – a fun and interactive way to play the classic wor
 
 ## Try it out!
 You can try out the game on [hangman.edvaldatli.com](https://hangman.edvaldatli.com).
+Please keep in mind that this game is not optimized for a browser!
 
 ## Installation
 
